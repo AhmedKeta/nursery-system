@@ -1,0 +1,43 @@
+{
+  "name": "nurserysystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-browser-runner runSpecs",
+    "start": "node app",
+    "devstart": "nodemon app",
+    "commitOnGitHub": "",
+    "deployCommand": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "app-root-path": "^3.1.0",
+    "bcrypt": "^5.1.0",
+    "cloudinary": "^1.36.4",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.1",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "soket.io": "^0.0.1-security",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "jasmine": "^4.6.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22",
+    "request": "^2.88.2"
+  }
+}
