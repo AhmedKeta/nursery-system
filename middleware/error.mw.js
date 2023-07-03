@@ -10,7 +10,7 @@ const winston = require(path.join(
 ));
 
 module.exports = (error, req, res, next) => {
-  winston.info(
+  winston.error(
     `Error: ${error.status || 500} message: ${
       error || "500 Internal Server Error"
     }`

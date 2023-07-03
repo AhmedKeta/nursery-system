@@ -1,15 +1,21 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable quotes */
 const path = require("path");
 const database = require(path.join(__dirname, "util", "database"));
 const express = require("express");
 const morgan = require("morgan");
+const { graphqlHTTP } = require("express-graphql");
+
+const graphqlSchema = require('./graphql/schema')
+const graphqlResolver = require('./graphql/resolvers')
 
 require(path.join(__dirname, "models", "model-require"));
 const corsMW = require(path.join(__dirname, "middleware", "cors.mw"));
 const winston = require(path.join(__dirname, "logs", "winston", "config"));
 const authMW = require(path.join(__dirname, "middleware", "auth.mw"));
 const errorMW = require(path.join(__dirname, "middleware", "error.mw"));
+const securityMW = require(path.join(__dirname, "middleware", "security.mw"));
 const compression = require("compression");
 require("dotenv").config();
 const authenticationRoute = require(path.join(
@@ -37,6 +43,14 @@ app.use(
     { stream: winston.stream }
   )
 );
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: graphqlSchema,
+    rootValue: graphqlResolver,
+  })
+);
+app.use(securityMW);
 app.use(corsMW);
 app.use(compression());
 app.use(express.json());
@@ -51,7 +65,11 @@ app.use(notFoundRoute);
 app.use(errorMW);
 
 database.mongoConnect(() => {
-  app.listen(port, () => {
+  const server = app.listen(port, () => {
     console.log("Express is listening ........");
   });
+  // require("./util/socket.io")(server);
+  // io.on("connection", (socket) => {
+  //   console.log("Clint connected .........");
+  // });
 });
